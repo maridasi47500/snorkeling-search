@@ -1,6 +1,6 @@
 $(function(){
 
-$('form').on('submit', function () {
+$('form:not(#jobform)').on('submit', function () {
   if (window.filesize > 1024*5) {
     alert('max upload size is 5k');
 return false;

@@ -32,6 +32,15 @@ class Route():
         print("set session",x)
         self.Program.set_my_session(x)
         self.render_figure.set_session(self.Program.get_session())
+    def get_some_post_data(self,params=()):
+        x={}
+        try:
+          for y in params:
+              print(self.post_data[y])
+              x[y]=self.post_data[y][0]
+        except Exception as e:
+          print("wow",e)
+        return x
     def set_redirect(self,x):
         self.Program.set_redirect(x)
         self.render_figure.set_redirect(self.Program.get_redirect())
@@ -92,6 +101,11 @@ class Route():
         else:
           self.set_json("{\"redirect\":\"/\"}")
         return self.render_figure.render_json()
+    def searchjob(self,params={}):
+        myparams=self.get_some_post_data(params=("job","lieu",))
+        self.render_figure.set_param("s",(myparams["job"] + " " +myparams["lieu"]))
+        self.render_figure.set_param("jobs",self.db.Job.getplacesnearby(myparams["job"],myparams["lieu"]))
+        return self.render_figure.render_figure("welcome/searchjob.html")
     def voirjob(self,params={}):
         getparams=("id",)
         myparam=self.get_this_route_param(getparams,params)
@@ -139,6 +153,7 @@ class Route():
 
 
                     '^/lancerscript$': self.lancerscript,
+                    '^/chercherjob$': self.searchjob,
                     '^/newjob$': self.newjob,
                     "^/voirjob/([0-9]+)$":self.voirjob,
                     '^/createjob$': self.createjob,

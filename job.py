@@ -30,18 +30,36 @@ class Job(Model):
         self.cur.execute("select * from job")
 
         row=self.cur.fetchall()
-        return row
+        geolocator = Nominatim(user_agent="abcdefgh")
+
+        yeah=[]
+        for x in row:
+
+            location = geolocator.reverse((x["lat"], x["lon"]), language='fr')
+            y=dict(x)
+            y["monlieu"]=location
+            yeah.append(y)
+           
+        return yeah
     def deletebyid(self,myid):
 
         self.cur.execute("delete from job where id = ?",(myid,))
         job=self.cur.fetchall()
         self.con.commit()
         return None
-    def getplacesnearby(self,myid):
-        sqlcommand2 = """SELECT id,address, sqrt( pow((69.1 * (lat - ?)), 2) + pow((69.1 * (? - lon) * cos(lat / 57.3)), 2)) AS distance FROM job GROUP BY job.id HAVING distance < 50 ORDER BY distance;"""
-        self.cur.execute(sqlcommand2,(startlat,startlng))
-        rows=self.cur.fetchall()
-        return rows
+    def getplacesnearby(self,text_job,text_address):
+        geolocator = Nominatim(user_agent="abcdefghij")
+        location = geolocator.geocode(text_address)
+        if location:
+            startlat=location.latitude
+            startlng=location.longitude
+            sqlcommand2 = """SELECT id,name,description,lat,lon, sqrt( pow((69.1 * (lat - ?)), 2) + pow((69.1 * (? - lon) * cos(lat / 57.3)), 2)) AS distance FROM job GROUP BY job.id HAVING distance < 50 and (lower(title) like '%"+text_job.replace(" ","%")+"%' or lower(description) like '%"+text_job.replace(" ","%")+"%') ORDER BY distance;"""
+            self.cur.execute(sqlcommand2,(startlat,startlng))
+            rows=self.cur.fetchall()
+            return rows
+        else:
+            return None
+
     def getplacenamebyid(self,myid):
         self.cur.execute("select * from job where id = ?",(myid,))
         row=dict(self.cur.fetchone())
