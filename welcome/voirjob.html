@@ -1,0 +1,76 @@
+<h1><%=job["name"]%></h1>
+<p><%=job["description"]%></p>
+<p>l'offre vient d'être postée</p>
+<p><a href="/">retour</a></p>
+        <div id="wowmap">
+                    <div id="mymap" onclick="">
+                                    <!-- Ici s'affichera la carte -->
+                                        </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+
+<script>
+
+  
+
+var theme = 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png';
+const LeafIcon = L.Icon.extend({
+			options: {
+							iconSize:     [95, 95],
+							shadowSize:   [50, 54],
+							iconAnchor:   [50, 50],
+							shadowAnchor: [50, 62],
+							popupAnchor:  [25, 25]
+						}
+		});
+
+    var lat = parseFloat(<%=job["lat"]%>);
+    var lon = parseFloat(<%=job["lon"]%>);
+            var alt =481;
+                var tacarte = null;
+                    //var trace = new Array();
+                        var i = 0;
+                            //var marker1;
+                                var markerClusters; // Servira à stocker les groupes de marqueurs
+                                    var popup = L.popup();
+                                      function initMyMap(){
+
+                                            // Nous définissons le dossier qui contiendra les marqueurs
+                                                  //var iconBase = 'img';
+                                                        // Créer l'objet "tacarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+                                                              tacarte = L.map('mymap').setView([lat, lon], 5);
+
+                                                                    markerClusters = L.markerClusterGroup; // Nous initialisons les groupes de marqueurs
+                                                                          // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
+                                                                                L.tileLayer(theme, {
+                                                                                          // Il est toujours bien de laisser le lien vers la source des données
+                                                                                                    //attribution: 'données © OpenStreetMap/ODbL - rendu OSM France',
+                                                                                                              minZoom: 1,
+                                                                                                                        maxZoom: 20
+                                                                                                                              }).addTo(tacarte);
+              
+var latlng,marker,hey,mypopup,icon,hey={"lat":"<%=job["lat"]%>","lon":"<%=job["lon"]%>", "name":"<%=job["name"]%>"};
+mypopup = L.popup();
+latlng={
+            "lat": Number(hey.lat),
+            "lng": Number(hey.lon)
+};
+console.log(latlng);
+popup
+    .setLatLng(latlng)
+    .setContent(hey.name+", ça apparait sur la carte à " + latlng.lat+" "+latlng.lng)
+    .openOn(tacarte);
+icon=new LeafIcon({iconUrl: "/mypic/"+hey.stuff+".png"});
+mymarker = L.marker(latlng, {icon: icon}).bindPopup(popup).addTo(tacarte);
+}
+                                                                                              $(document).ready(function(){
+map.style.display="none";
+
+initMyMap();
+
+});
+
+</script>

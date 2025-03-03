@@ -1,0 +1,7 @@
+uploads/
+
+__pycache__/
+monscript/lancer_**
+monscript/
+myFileDb.db
+Xterm.log**
