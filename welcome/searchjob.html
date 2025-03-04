@@ -1,3 +1,7 @@
+
 <h1>toutes les  offres trouvees pour <%=params["s"]%></h1>
+<p id="messagesearchjob">
+<%=params["message"]%>
+</p>
 <%=render_collection(collection=params['jobs'], partial='welcome/_job.html', as_='job')%>
 

@@ -48,17 +48,24 @@ class Job(Model):
         self.con.commit()
         return None
     def getplacesnearby(self,text_job,text_address):
-        geolocator = Nominatim(user_agent="abcdefghij")
-        location = geolocator.geocode(text_address)
-        if location:
-            startlat=location.latitude
-            startlng=location.longitude
-            sqlcommand2 = """SELECT id,name,description,lat,lon, sqrt( pow((69.1 * (lat - ?)), 2) + pow((69.1 * (? - lon) * cos(lat / 57.3)), 2)) AS distance FROM job GROUP BY job.id HAVING distance < 50 and (lower(title) like '%"+text_job.replace(" ","%")+"%' or lower(description) like '%"+text_job.replace(" ","%")+"%') ORDER BY distance;"""
-            self.cur.execute(sqlcommand2,(startlat,startlng))
-            rows=self.cur.fetchall()
-            return rows
-        else:
-            return None
+        try:
+            print("nearby")
+            geolocator = Nominatim(user_agent="abcdefghij")
+            location = geolocator.geocode(text_address)
+            if location:
+                startlat=location.latitude
+                startlng=location.longitude
+                sqlcommand2 = """SELECT id,name,description,lat,lon, sqrt( pow((69.1 * (lat - ?)), 2) + pow((69.1 * (? - lon) * cos(lat / 57.3)), 2)) AS distance FROM job GROUP BY job.id HAVING distance < 50 and (lower(title) like '%"+text_job.replace(" ","%")+"%' or lower(description) like '%"+text_job.replace(" ","%")+"%') ORDER BY distance;"""
+                self.cur.execute(sqlcommand2,(startlat,startlng))
+                rows=self.cur.fetchall()
+                if len(rows) > 0:
+                    return {"rows":rows, "message":"des offres ont été trouvées"}
+                else:
+                    return {"rows":rows, "message":"aucune offre a été trouvée"}
+            else:
+                return {"rows":[], "message":"aucun lieu n'a été trouvé"}
+        except Exception as e:
+            return {"rows":[], "message":"il y a eu un probleme de connexion internet"}
 
     def getplacenamebyid(self,myid):
         self.cur.execute("select * from job where id = ?",(myid,))

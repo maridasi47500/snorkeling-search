@@ -32,14 +32,19 @@ class Route():
         print("set session",x)
         self.Program.set_my_session(x)
         self.render_figure.set_session(self.Program.get_session())
+    def get_exception_routes(self):
+        #form n'est pas envoye avec javascript/jquery
+        return ["/chercherjob"]
     def get_some_post_data(self,params=()):
+        #if route in  some routes
         x={}
         try:
-          for y in params:
-              print(self.post_data[y])
-              x[y]=self.post_data[y][0]
+            for y in params:
+                print(self.post_data) #erreur
+                print(self.post_data[y]) #erreur
+                x[y]=self.post_data[y][0]
         except Exception as e:
-          print("wow",e)
+            print("wow",e)
         return x
     def set_redirect(self,x):
         self.Program.set_redirect(x)
@@ -55,13 +60,12 @@ class Route():
         self.Program.set_session_params({"notice":x})
         self.render_figure.set_session(self.Program.get_session())
     def set_session(self,x):
-          print("set session",x)
-          self.Program.set_session(x)
-          self.render_figure.set_session(self.Program.get_session())
+        print("set session",x)
+        self.Program.set_session(x)
+        self.render_figure.set_session(self.Program.get_session())
     def get_this_route_param(self,x,params):
-          print("set session",x)
-          return dict(zip(x,params["routeparams"]))
-          
+        print("set session",x)
+        return dict(zip(x,params["routeparams"]))
     def logout(self,search):
         self.Program.logout()
         self.set_redirect("/")
@@ -102,9 +106,12 @@ class Route():
           self.set_json("{\"redirect\":\"/\"}")
         return self.render_figure.render_json()
     def searchjob(self,params={}):
-        myparams=self.get_some_post_data(params=("job","lieu",))
+        print("yay")
+        myparams=self.get_some_post_data(params=("job","lieu"))
         self.render_figure.set_param("s",(myparams["job"] + " " +myparams["lieu"]))
-        self.render_figure.set_param("jobs",self.db.Job.getplacesnearby(myparams["job"],myparams["lieu"]))
+        ok=self.db.Job.getplacesnearby(myparams["job"],myparams["lieu"])["rows"]
+        self.render_figure.set_param("jobs",ok["rows"])
+        self.render_figure.set_param("message",ok["message"])
         return self.render_figure.render_figure("welcome/searchjob.html")
     def voirjob(self,params={}):
         getparams=("id",)
@@ -120,6 +127,8 @@ class Route():
         self.render_figure.set_param("tout",tout)
         return self.render_some_json("welcome/hey.json")
     def run(self,redirect=False,redirect_path=False,path=False,session=False,params={},url=False,post_data=False):
+        if params:
+            print("mes only params : ", params)
         if post_data:
             print("post data")
             self.set_post_data(post_data)

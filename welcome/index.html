@@ -1,29 +1,29 @@
-<div id="myid"></div>
+<div id="myidmydiv"></div>
 <h2>rechercher une  offre</h2>
 <form id="jobform" action="/chercherjob" method="post">
 																					         <div class="field">
 																							                 <label for="monjob">nom du job</label>
-																									                 <input type="text" onchange="validateInput()" name="job" id="monjob"/>
+																									                 <input type="text" onchange="" name="job" id="monjob"/>
 																											         </div>
 																					         <div class="field">
 																							                 <label for="monlieu">lieu</label>
 																									                 <input type="text" name="lieu" id="monlieu"/>
 																											         </div>
-	<div class="action">
+	<div class="actions">
 		<input type="submit" value="submit" name="submit"/>
 	</div>
 </form>
 
     <script>
-        function validateInput() {
-            const input = document.getElementById('monjob').value;
-            const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/; // Expression régulière pour accepter uniquement les lettres et les espaces
-            if (!regex.test(input)) {
-                alert('Veuillez entrer uniquement des mots (lettres et espaces).');
-                return false; // Empêche la soumission du formulaire
-            }
-            return true; // Autorise la soumission du formulaire
-        }
+//        function validateInput() {
+//            const input = document.getElementById('monjob').value;
+//            const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/; // Expression régulière pour accepter uniquement les lettres et les espaces
+//            if (!regex.test(input)) {
+//                alert('Veuillez entrer uniquement des mots (lettres et espaces).');
+//                return false; // Empêche la soumission du formulaire
+//            }
+//            return true; // Autorise la soumission du formulaire
+//        }
 </script>
     
 

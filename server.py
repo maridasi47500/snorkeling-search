@@ -30,6 +30,7 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 
 
 class S(BaseHTTPRequestHandler):
+    maroute=Route()
     def myline(self,x):
         print("======",x,"======")
     def deal_post_data(self,params):
@@ -192,10 +193,11 @@ class S(BaseHTTPRequestHandler):
 
         self.end_headers()
     def do_GET(self):
+
         logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
         myparams = parse_qs(urlparse(self.path).query)
         dictcook=(req.cookies.get_dict())
-        myProgram=Route().run(path=str(self.path),params=myparams,session=dictcook,url=self.path,post_data=False)
+        myProgram=self.maroute.run(path=str(self.path),params=myparams,session=dictcook,url=self.path,post_data=False)
         sess= myProgram.get_session()
         print("param session",sess)
         print("param get",myparams)
@@ -207,17 +209,24 @@ class S(BaseHTTPRequestHandler):
         self.wfile.write(myProgram.get_html())
     def do_POST(self):
         content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
-        #post_data = self.rfile.read(content_length) # <--- Gets the data itself
-        #logging.info("POST request,\nPath: %s\nHeaders:\n%s\n\nBody:\n%s\n",
-                #str(self.path), str(self.headers), "post data")
-        myparams = parse_qs(urlparse(self.path).query)
-        dictcook=(req.cookies.get_dict())
-        #print("d i ct cook",dictcook)
-        #print("p a r a m s",myparams)
+        if self.path in self.maroute.get_exception_routes():
+            post_data = self.rfile.read(content_length) # <--- Gets the data itself
+            my_post_data=parse.parse_qs(post_data.decode('utf-8'))
+            myparams = parse_qs(urlparse(self.path).query)
+            dictcook=(req.cookies.get_dict())
+            logging.info("POST request,\nPath: %s\nHeaders:\n%s\n\nBody:\n%s\n",
+                    str(self.path), str(self.headers), "post data")
+            myProgram=self.maroute.run(path=str(self.path),params=myparams,session=dictcook,url=self.path,post_data=my_post_data)
+
+        else:
+            myparams = parse_qs(urlparse(self.path).query)
+            dictcook=(req.cookies.get_dict())
+            #print("d i ct cook",dictcook)
+            #print("p a r a m s",myparams)
 
 
-        #logging.info(parse.parse_qs(post_data.decode('utf-8')))
-        myProgram=Route().run(path=str(self.path),params=myparams,session=dictcook,url=self.path,post_data=self.deal_post_data)
+            #logging.info(parse.parse_qs(post_data.decode('utf-8')))
+            myProgram=self.maroute.run(path=str(self.path),params=myparams,session=dictcook,url=self.path,post_data=self.deal_post_data)
         sess= myProgram.get_session()
         if sess:
           for x in sess:
