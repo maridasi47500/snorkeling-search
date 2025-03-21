@@ -2,6 +2,7 @@ from directory import Directory
 from fichier import Fichier
 class Css(Directory):
     def __init__(self,name):
+        self.title="stylesheet"
         self.name=name
         self.content=Fichier("./css",name.split("/")[-1]).lire()
         self.css=True
