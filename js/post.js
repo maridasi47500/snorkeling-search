@@ -1,3 +1,16 @@
+
+function ecrireJobs(){
+var yeah=" <select id=\"monjob1\" name=\"job\">";
+var maliste=["informatique","technicien informatique","technicien support informatique","technicien réseaux"];
+for (var i=0;i<maliste.length;i++){
+yeah+="<option value=\""+maliste[i]+"\">"+maliste[i]+"</option>";
+}
+yeah+="</select>";
+monjob1.outerHTML=yeah;
+}
+window.onload=function(){
+}
+
 $(function(){
 
 $('form:not(#jobform):not(#jobformweb)').on('submit', function () {
