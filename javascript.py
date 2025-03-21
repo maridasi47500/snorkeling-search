@@ -2,6 +2,7 @@ from directory import Directory
 from fichier import Fichier
 class Js(Directory):
     def __init__(self,name):
+        self.title="hey"
         self.name=name
         self.content=Fichier("./js",name.split("/")[-1]).lire()
         self.js=True

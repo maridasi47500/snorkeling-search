@@ -1,9 +1,7 @@
 from directory import Directory
 from render_figure import RenderFigure
-from myscript import Myscript
-from mycommandline import Mycommandline
 from mydb import Mydb
-from scriptpython import Scriptpython
+from scriptruby import Scriptruby
 
 
 from mypic import Pic
@@ -18,9 +16,7 @@ class Route():
         self.Program=Directory("trouve 1 job ")
         self.Program.set_path("./")
         self.mysession={"notice":None,"email":None,"name":None}
-        self.dbScript=Myscript()
-        self.scriptpython=Scriptpython
-        self.dbCommandline=Mycommandline()
+        self.scriptruby=Scriptruby
         self.db = Mydb()
         self.render_figure=RenderFigure(self.Program)
         self.getparams=("id",)
@@ -34,7 +30,7 @@ class Route():
         self.render_figure.set_session(self.Program.get_session())
     def get_exception_routes(self):
         #form n'est pas envoye avec javascript/jquery
-        return ["/chercherjob"]
+        return ["/chercherjobweb","/chercherjob"]
     def get_some_post_data(self,params=()):
         #if route in  some routes
         x={}
@@ -79,18 +75,6 @@ class Route():
         hi=self.dbScript.getall()
         self.render_figure.set_param("scripts",hi)
         return self.render_figure.render_figure("welcome/allscript.html")
-    def lancerscript(self,search):
-        myparam=search["myid"][0]
-        hi=self.dbScript.getbyid(myparam)
-        print(hi, "my script")
-        a=self.scriptpython(hi["name"]).lancer()
-        return self.render_some_json("welcome/monscript.json")
-    def monscript(self,search):
-        myparam=self.get_post_data()(params=("name","content","monscript",))
-        hey=self.dbCommandline.create(myparam)
-        hi=self.dbScript.create(myparam)
-        print(hey,hi)
-        return self.render_some_json("welcome/monscript.json")
     def hello(self,search):
         print("hello action")
         return self.render_figure.render_figure("welcome/index.html")
@@ -105,11 +89,25 @@ class Route():
         else:
           self.set_json("{\"redirect\":\"/\"}")
         return self.render_figure.render_json()
+    def searchjobweb(self,params={}):
+        print("yay")
+        myparams=self.get_some_post_data(params=("job","lieu"))
+        self.render_figure.set_param("s",(myparams["job"] + " " +myparams["lieu"]))
+        print("job ::: ",myparams["job"],myparams["lieu"])
+        ok=self.db.Job.getplacesnearby(myparams["job"],myparams["lieu"])
+        self.render_figure.set_param("jobs",ok["rows"])
+        self.render_figure.set_param("message",ok["message"])
+        try:
+            print("job",myparams["job"],myparams["lieu"])
+            self.scriptruby("job",myparams["job"],myparams["lieu"]).lancer()
+        except Exception as e:
+            print(e)
+        return self.render_figure.render_figure("welcome/searchjob.html")
     def searchjob(self,params={}):
         print("yay")
         myparams=self.get_some_post_data(params=("job","lieu"))
         self.render_figure.set_param("s",(myparams["job"] + " " +myparams["lieu"]))
-        ok=self.db.Job.getplacesnearby(myparams["job"],myparams["lieu"])["rows"]
+        ok=self.db.Job.getplacesnearby(myparams["job"],myparams["lieu"])
         self.render_figure.set_param("jobs",ok["rows"])
         self.render_figure.set_param("message",ok["message"])
         return self.render_figure.render_figure("welcome/searchjob.html")
@@ -161,15 +159,14 @@ class Route():
             ROUTES={
 
 
-                    '^/lancerscript$': self.lancerscript,
                     '^/chercherjob$': self.searchjob,
+                    '^/chercherjobweb$': self.searchjobweb,
                     '^/newjob$': self.newjob,
                     "^/voirjob/([0-9]+)$":self.voirjob,
                     '^/createjob$': self.createjob,
                     '^/toutcequejaiajoute$': self.voirtoutcequejaiajoute,
                     '^/allscript$': self.allscript,
                     '^/welcome$': self.welcome,
-                    '^/monscript$': self.monscript,
                     '^/$': self.hello
 
                     }

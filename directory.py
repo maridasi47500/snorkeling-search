@@ -5,7 +5,7 @@ class Directory():
     js=False
     json=False
     css=False
-    def __init__(self, title):
+    def __init__(self, title = "trouve 1 job"):
         self.title=title
         self.session={"email":None,"name":None,"notice":None}
         self.path="./"
@@ -33,6 +33,8 @@ class Directory():
                 self.session[x]=""
         self.session["mysession"]=False
     def set_my_session(self,s):
+        if not self.session:
+            self.session={}
         for x in ["email","name","notice"]:
             try:
                 self.session[x]=s[x]
