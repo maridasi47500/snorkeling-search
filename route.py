@@ -99,7 +99,7 @@ class Route():
         self.render_figure.set_param("message",ok["message"])
         try:
             print("job",myparams["job"],myparams["lieu"])
-            self.scriptruby("job",myparams["job"],myparams["lieu"]).lancer()
+            haha=self.scriptruby("job",myparams["job"],myparams["lieu"]).lancer()
         except Exception as e:
             print(e)
         return self.render_figure.render_figure("welcome/searchjob.html")
@@ -125,8 +125,6 @@ class Route():
         self.render_figure.set_param("tout",tout)
         return self.render_some_json("welcome/hey.json")
     def run(self,redirect=False,redirect_path=False,path=False,session=False,params={},url=False,post_data=False):
-        if params:
-            print("mes only params : ", params)
         if post_data:
             print("post data")
             self.set_post_data(post_data)
@@ -142,11 +140,24 @@ class Route():
             self.redirect_path=redirect
         if not self.render_figure.partie_de_mes_mots(balise="section",text=self.Program.get_title()):
             self.render_figure.ajouter_a_mes_mots(balise="section",text=self.Program.get_title())
-        if path and path.endswith("jpg"):
+        if path and path.endswith("png"):
             self.Program=Pic(path)
             self.Program.set_path("./")
-        elif path and path.endswith(".png"):
+        elif path and path.endswith("html"):
+            self.Program=Somehtml(path)
+            self.Program.set_path("./")
+        elif path and path.endswith("jpeg"):
             self.Program=Pic(path)
+            self.Program.set_path("./")
+        elif path and path.endswith("gif"):
+            self.Program=Pic(path)
+            self.Program.set_path("./")
+        elif path and path.endswith("svg"):
+            self.Program=Pic(path)
+            self.Program.set_path("./")
+        elif path and path.endswith("jpg"):
+            self.Program=Pic(path)
+            self.Program.set_path("./")
         elif path and path.endswith(".jfif"):
             self.Program=Pic(path)
         elif path and path.endswith(".css"):
@@ -166,25 +177,30 @@ class Route():
                     '^/createjob$': self.createjob,
                     '^/toutcequejaiajoute$': self.voirtoutcequejaiajoute,
                     '^/allscript$': self.allscript,
-                    '^/welcome$': self.welcome,
                     '^/$': self.hello
 
                     }
+            REDIRECT={"/save_user": "/welcome"}
             REDIRECT={"/save_user": "/welcome"}
             for route in ROUTES:
                print("pattern=",route)
                mycase=ROUTES[route]
                x=(re.match(route,path))
                print(True if x else False)
+               #code bon pour les erreurs dans le code python
                if x:
                    params["routeparams"]=x.groups()
                    try:
-                       self.Program.set_html(html=mycase(params))
-
-
-                   except Exception:  
-                       self.Program.set_html(html="<p>une erreur s'est produite "+str(traceback.format_exc())+"</p><a href=\"/\">retour à l'accueil</a>")
+                       html=mycase(params)
+                   except Exception as e:
+                       print("erreur"+str(e),traceback.format_exc())
+                       html=("<p>une erreur s'est produite dans le code server  "+(traceback.format_exc())+"</p><a href=\"/\">retour à l'accueil</a>").encode("utf-8")
+                       print(html)
+                   self.Program.set_html(html=html)
+                   self.Program.clear_notice()
+                   #self.Program.redirect_if_not_logged_in()
                    return self.Program
                else:
                    self.Program.set_html(html="<p>la page n'a pas été trouvée</p><a href=\"/\">retour à l'accueil</a>")
+
         return self.Program

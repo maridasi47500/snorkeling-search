@@ -21,6 +21,9 @@ class Scriptruby:
         code=location.address.split(", ")[-2]
         pays=location.address.split(", ")[-3]
         city=location.address.split(", ")[0]
-        x=subprocess.check_output(["sh","./chercher"+self.name+".sh",self.job,city,code, pays, str(location.latitude), str(location.longitude)])
+        try:
+            x=subprocess.check_output(["sh","./chercher"+self.name+".sh",self.job,city,code, pays, str(location.latitude), str(location.longitude)])
+        except:
+            x="blah"
         return x
 

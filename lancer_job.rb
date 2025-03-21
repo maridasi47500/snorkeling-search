@@ -24,7 +24,7 @@ browser = Watir::Browser.new :firefox
 links.each do |link|
   yes=Addressable::URI.escape link
   browser.goto(yes) # Go to the first link
-  browser.execute_script("window.open('#{link}')") # Open the rest in new tabs
+  browser.execute_script("window.open('#{yes}')") # Open the rest in new tabs
 end
 
 # Keep the browser open to view the tabs
