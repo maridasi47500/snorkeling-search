@@ -5,8 +5,7 @@
 
 # job-search
  ````
-gem install watir
-gem install addressable
+gem install watir addressable
 pip3 install geopy
 pip3 install geopandas
 
