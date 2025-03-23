@@ -21,10 +21,31 @@ links = ["https://www.flers-emplois.com/emploi/recherche.html?k=#{job}+#{ville}"
 browser = Watir::Browser.new :firefox
 
 # Open each link in a new tab
-links.each do |link|
+links.each_with_index do |link,i|
   yes=Addressable::URI.escape link
-  browser.goto(yes) # Go to the first link
-  browser.execute_script("window.open('#{yes}')") # Open the rest in new tabs
+  if i==0
+      browser.goto(yes) # Go to the first link
+  else
+      browser.execute_script("window.open('#{yes}');return false") # Open the rest in new tabs
+  end
+
+
+end
+links1=["https://www.fomatguyane.fr/offres-d-emploi/offres-kourou"]
+links1.each_with_index do |link,i|
+  yes=Addressable::URI.escape link
+
+
+
+  if yes.include?("fomatguyane")
+       
+      # Switch to the first window
+      browser.window(title: 'OFFRES KOUROU - FOMAT GUYANE').use
+      sleep 2
+      browser.execute_script("document.body.innerHTML=document.body.innerHTML.toLowerCase().replace((new RegExp('#{job.downcase}','g')), '<mark>#{job}</mark>');") # Open the rest in new tabs
+      browser.window(title: "Recherche offres d'emploi à Flers - Page 1 | Flers-Emplois").use
+  end
+
 end
 
 # Keep the browser open to view the tabs
