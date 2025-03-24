@@ -31,6 +31,7 @@ links.each_with_index do |link,i|
 
 
 end
+sleep 10
 links1=["https://www.fomatguyane.fr/offres-d-emploi/offres-kourou"]
 links1.each_with_index do |link,i|
   yes=Addressable::URI.escape link
@@ -41,7 +42,7 @@ links1.each_with_index do |link,i|
        
       # Switch to the first window
       browser.window(title: 'OFFRES KOUROU - FOMAT GUYANE').use
-      sleep 2
+
       browser.execute_script("document.body.innerHTML=document.body.innerHTML.toLowerCase().replace((new RegExp('#{job.downcase}','g')), '<mark>#{job}</mark>');") # Open the rest in new tabs
       browser.window(title: "Recherche offres d'emploi à Flers - Page 1 | Flers-Emplois").use
   end
