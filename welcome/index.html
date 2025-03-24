@@ -17,12 +17,23 @@
 <button onclick="ecrireJobs()">chercher des jobs en informatique</button>
 <form id="jobformweb" action="/chercherjobweb" method="post">
 																					         <div class="field">
-																							                 <label for="monjob">nom du job</label>
+																							                 <label for="monjob1">nom du job</label>
 																									                 <input type="text" onchange="" name="job" id="monjob1"/>
 																											         </div>
 																					         <div class="field">
-																							                 <label for="monlieu">lieu</label>
+																							                 <label for="monlieu1">lieu</label>
 																									                 <input type="text" name="lieu" id="monlieu1"/>
+																											         </div>
+																					         <div class="field">
+																							                 <label for="monrayon1">rayon</label>
+																									                 
+<select name="rayon" id="monrayon1">
+<option value="10">10km</option>
+<option value="20">20km</option>
+<option value="30">30km</option>
+<option value="50">50km</option>
+<option value="100">100km</option>
+</select>
 																											         </div>
 	<div class="actions">
 		<input type="submit" value="submit" name="submit"/>

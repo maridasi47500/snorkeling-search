@@ -1,10 +1,10 @@
 
 function ecrireJobs(){
 var yeah=" <select id=\"monjob1\" name=\"job\">";
-var maliste=["informatique","technicien informatique","technicien support informatique","technicien réseaux","ingénieur systèmes réseaux et cybersécurité","Technicien(ne) Fibre Optique et Cuivre","INGENIEUR INFORMATIQUE SUPERVISION & RESEAUX"];
+var maliste=["informatique","technicien informatique","technicien informatique et réseaux","technicien support informatique","technicien réseaux","ingénieur systèmes réseaux et cybersécurité","Technicien(ne) Fibre Optique et Cuivre","INGENIEUR INFORMATIQUE SUPERVISION & RESEAUX","Ingénieur Réseaux Terrain","Ingénieur Logiciel et Systèmes embarqués","INGENIEUR INFORMATIQUE INDUSTRIELLE","Architecte Système","commercial informatique BtoB","ingénieur commercial bureautique informatique","technicien automatisme","technicien methodes gmao","ingénieur électricité cfo cfa","ingénieur développeur python","technicien de maintenance","techniciens geii","Technicienne de maintenance en informatique","Gestionnaire informatique","responsable informatique","développeur informatique"," Administratrice réseau informatique ","agent d'accueil","technicien burautique","architecte système","administrateur système et réseaux","manager réseau","développeur c++","Programmeur Développement","Programmeur Développement","chargé d'études informatique","responsable des systèmes d'information","ingénieur commercial informatique","ingénieur commercial bureautique","correspondant informatique digital"];
 
 for (var i=0;i<maliste.length;i++){
-yeah+="<option value=\""+maliste[i]+"\">"+maliste[i]+"</option>";
+yeah+="<option value=\""+maliste[i].toLowerCase()+"\">"+maliste[i].toLowerCase()+"</option>";
 }
 yeah+="</select>";
 monjob1.outerHTML=yeah;

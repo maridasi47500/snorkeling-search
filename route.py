@@ -91,15 +91,15 @@ class Route():
         return self.render_figure.render_json()
     def searchjobweb(self,params={}):
         print("yay")
-        myparams=self.get_some_post_data(params=("job","lieu"))
-        self.render_figure.set_param("s",(myparams["job"] + " " +myparams["lieu"]))
+        myparams=self.get_some_post_data(params=("job","lieu","rayon"))
+        self.render_figure.set_param("s",(myparams["job"] + " " +myparams["lieu"] + " dans un rayon de " + myparams["rayon"]+" km"))
         print("job ::: ",myparams["job"],myparams["lieu"])
         ok=self.db.Job.getplacesnearby(myparams["job"],myparams["lieu"])
         self.render_figure.set_param("jobs",ok["rows"])
         self.render_figure.set_param("message",ok["message"])
         try:
             print("job",myparams["job"],myparams["lieu"])
-            haha=self.scriptruby("job",myparams["job"],myparams["lieu"]).lancer()
+            haha=self.scriptruby("job",myparams["job"],myparams["lieu"],myparams["rayon"]).lancer()
         except Exception as e:
             print(e)
         return self.render_figure.render_figure("welcome/searchjob.html")
