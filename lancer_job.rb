@@ -43,8 +43,10 @@ links.each_with_index do |link,i|
        
       # Switch to the first window
       browser.window(title: 'OFFRES KOUROU - FOMAT GUYANE').use
-
-      browser.execute_script("document.body.innerHTML=document.body.innerHTML.toLowerCase().replace((new RegExp('(#{job.downcase.split(" ").join("|")})','g')), '<mark>#{job}</mark>');") # Open the rest in new tabs
+      
+      job.downcase.split(" ").each do |wow|
+          browser.execute_script("document.body.innerHTML=document.body.innerHTML.toLowerCase().replace((new RegExp('(#{wow})','g')), '<mark>#{wow}</mark>');") # Open the rest in new tabs
+      end
   elsif yes.include?("fiderim")
        
       # Switch to the first window
