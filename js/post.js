@@ -1,7 +1,8 @@
 
 function ecrireJobs(){
 var yeah=" <select id=\"monjob1\" name=\"job\">";
-var maliste=["informatique","technicien informatique","technicien support informatique","technicien réseaux"];
+var maliste=["informatique","technicien informatique","technicien support informatique","technicien réseaux","ingénieur systèmes réseaux et cybersécurité","Technicien(ne) Fibre Optique et Cuivre","INGENIEUR INFORMATIQUE SUPERVISION & RESEAUX"];
+
 for (var i=0;i<maliste.length;i++){
 yeah+="<option value=\""+maliste[i]+"\">"+maliste[i]+"</option>";
 }
