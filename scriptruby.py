@@ -23,8 +23,12 @@ class Scriptruby:
         pays=location.address.split(", ")[-3]
         city=location.address.split(", ")[0]
         try:
-            x=subprocess.check_output(["sh","./chercher"+self.name+".sh",self.job,city,code, pays, str(location.latitude), str(location.longitude),str(self.rayon)])
-        except:
+            print(" ".join(["sh","./chercher"+self.name+".sh",self.job,city,code, pays, str(location.latitude), str(location.longitude), str(self.rayon)]))
+            print("hey !!!")
+
+            x=subprocess.check_output(["sh","./chercher"+self.name+".sh",self.job,city,code, pays, str(location.latitude), str(location.longitude), str(self.rayon)])
+        except Exception as e:
             x="blah"
+            print(e)
         return x
 
