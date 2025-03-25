@@ -144,7 +144,7 @@ links.each_with_index do |link,i|
   elsif yes.include?("cyphoma")
        
       # Switch to the first window
-      browser.window(title: 'Blada.com - Moteur de recherche').use
+      browser.window(title: 'Annonces • Cyphoma').use
 
       browser.execute_script("jQuery('[data-label=jobs]')[0].selected=true") # Open the rest in new tabs
       browser.execute_script("search_q.value=\"#{job}\"") # Open the rest in new tabs
