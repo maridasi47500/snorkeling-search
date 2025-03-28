@@ -161,6 +161,27 @@ links.each_with_index do |link,i|
       #    browser.execute_script("jQuery('[aria-label=Rechercher]')[0].click()") # Open the rest in new tabs
       #    sleep 0.5
 
+      elsif yes.include?("choisir")
+           
+          # Switch to the first window
+          browser.window(title: "Offres d'emploi domaine | Choisir le service public").use
+
+          browser.execute_script("document.getElementsByTagName(\"button\")[12].click()") # Open the rest in new tabs
+          browser.execute_script("document.getElementsByTagName(\"input\")[30].value=\"#{pays}\"") # Open the rest in new tabs
+          browser.execute_script("Array.from(document.getElementsByTagName(\"input\")).filter(x=>x.parentElement.textContent.includes(\"#{pays}\"))[21].checked=true") # Open the rest in new tabs
+          browser.execute_script("document.getElementsByClassName(\"actions1\")[0].children[2].click()")
+          sleep 0.5
+
+      elsif yes.include?("recrutement")
+           
+          # Switch to the first window
+          browser.window(title: 'Trouver une offre').use
+          browser.execute_script("document.getElementsById(\"OffreEmploi__c_Region__c-36\").click()") # Open the rest in new tabs
+          browser.execute_script("Array.from(document.getElementsByTagName(\"input\")).filter(x=>x.parentElement.textContent.includes(\"#{pays.upcase}\"))[0].checked=true") # Open the rest in new tabs
+          browser.execute_script("Array.from(document.getElementsByTagName(\"button\")).filter(x=>x.title=(\"Rechercher une offre d'emploi\"))[0].click()") # Open the rest in new tabs
+
+          sleep 0.5
+
       elsif yes.include?("cyphoma")
            
           # Switch to the first window

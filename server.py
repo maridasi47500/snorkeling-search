@@ -30,7 +30,7 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 
 
 class S(BaseHTTPRequestHandler):
-    maroute=Route()
+    maroute=None
     def myline(self,x):
         print("======",x,"======")
     def deal_post_data(self,params):
@@ -193,6 +193,7 @@ class S(BaseHTTPRequestHandler):
 
         self.end_headers()
     def do_GET(self):
+        self.maroute=Route()
 
         logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
         myparams = parse_qs(urlparse(self.path).query)
@@ -208,6 +209,7 @@ class S(BaseHTTPRequestHandler):
         self._set_response(redirect=myProgram.get_redirect(),cookies=req.cookies,pic=myProgram.get_pic(),js=myProgram.get_js(),css=myProgram.get_css(),json=myProgram.get_json())
         self.wfile.write(myProgram.get_html())
     def do_POST(self):
+        self.maroute=Route()
         content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
         if self.path in self.maroute.get_exception_routes():
             post_data = self.rfile.read(content_length) # <--- Gets the data itself

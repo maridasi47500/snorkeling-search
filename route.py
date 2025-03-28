@@ -102,6 +102,7 @@ class Route():
             haha=self.scriptruby("job",myparams["job"],myparams["lieu"],myparams["rayon"]).lancer()
         except Exception as e:
             print(e)
+        print(ok,"OHHHHHHH EHHHHHH")
         return self.render_figure.render_figure("welcome/searchjob.html")
     def searchjob(self,params={}):
         print("yay")

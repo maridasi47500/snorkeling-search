@@ -11,11 +11,11 @@ class Directory():
     mesparams=["email","name","notice"]
     def __init__(self, title):
         self.title=title
-        self.session={"email":"","user_id":"","name":"","notice":""}
+        self.session={"email":"","name":"","notice":""}
         self.path="./"
         self.html=""
         self.url=""
-        self.mesparams=["email","name","user_id","notice"]
+        self.mesparams=list(self.session.keys())
         self.redirect=False
         self.session={}
     def logout(self):
