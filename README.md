@@ -5,8 +5,13 @@
 
 # job-search
  ````
-gem install watir addressable
+gem install watir addressable i18n
 pip3 install geopy
 pip3 install geopandas
+    mkdir -p ~/path/to/venv
+    python3 -m venv ~/path/to/venv
+    source ~/path/to/venv/bin/activate
+    python3 -m pip install xyz
+
 
 ````

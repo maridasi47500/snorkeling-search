@@ -166,6 +166,7 @@ class Route():
             self.Program=Js(path)
         elif path:
             path=path.split("?")[0]
+            print("OHHHHHH ")
             print("link route ",path)
             ROUTES={
 
@@ -198,7 +199,6 @@ class Route():
                        print(html)
                    self.Program.set_html(html=html)
                    self.Program.clear_notice()
-                   #self.Program.redirect_if_not_logged_in()
                    return self.Program
                else:
                    self.Program.set_html(html="<p>la page n'a pas été trouvée</p><a href=\"/\">retour à l'accueil</a>")

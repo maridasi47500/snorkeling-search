@@ -8,7 +8,7 @@ class Directory():
     nocache=False
     json=False
     css=False
-    mesparams=["email","name","user_id","notice"]
+    mesparams=["email","name","notice"]
     def __init__(self, title):
         self.title=title
         self.session={"email":"","user_id":"","name":"","notice":""}
