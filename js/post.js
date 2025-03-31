@@ -2,10 +2,17 @@
 function ecrireJobs(){
 var yeah=" <select id=\"monjob1\" name=\"job\">";
 var maliste=["informatique","technicien informatique","technicien informatique et réseaux","technicien support informatique","technicien réseau","ingénieur systèmes réseaux et cybersécurité","Technicien(ne) Fibre Optique et Cuivre","INGENIEUR INFORMATIQUE SUPERVISION & RESEAUX","Ingénieur Réseaux Terrain","Ingénieur Logiciel et Systèmes embarqués","INGENIEUR INFORMATIQUE INDUSTRIELLE","Architecte Système","commercial informatique BtoB","ingénieur commercial bureautique informatique","technicien automatisme","technicien methodes gmao","ingénieur électricité cfo cfa","ingénieur développeur python","technicien de maintenance","techniciens geii","Technicienne de maintenance en informatique","Gestionnaire informatique","responsable informatique","développeur informatique"," Administratrice réseau informatique ","agent d'accueil","technicien burautique","architecte système","administrateur système et réseaux","manager réseau","développeur c++","Programmeur Développement","Programmeur Développement","chargé d'études informatique","responsable des systèmes d'information","ingénieur commercial informatique","ingénieur commercial bureautique","correspondant informatique digital","Spécialiste système d’information","Technicien réseaux et télécommunications","technicien système"];
-
+var malisteok=["agronome"];
+yeah+="  <optgroup label=\"informatique\">"
 for (var i=0;i<maliste.length;i++){
-yeah+="<option value=\""+maliste[i].toLowerCase()+"\">"+maliste[i].toLowerCase()+"</option>";
+yeah+="<option value=\""+maliste[i].toLowerCase().replace("&","").replace("(","").replace(")","")+"\">"+maliste[i].toLowerCase()+"</option>";
 }
+yeah+="  </optgroup>"
+yeah+="  <optgroup label=\"agronome\">"
+for (var i=0;i<malisteok.length;i++){
+yeah+="<option value=\""+malisteok[i].toLowerCase().replace("&","").replace("(","").replace(")","")+"\">"+malisteok[i].toLowerCase()+"</option>";
+}
+yeah+="  </optgroup>"
 yeah+="</select>";
 monjob1.outerHTML=yeah;
 }

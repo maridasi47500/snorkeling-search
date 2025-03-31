@@ -5,7 +5,7 @@
 
 # job-search
  ````
-gem install watir addressable i18n
+gem install watir addressable i18n logger
 pip3 install geopy
 pip3 install geopandas
     mkdir -p ~/path/to/venv
