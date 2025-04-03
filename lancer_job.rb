@@ -197,7 +197,7 @@ links.each_slice(10).to_a.each do |myarray|
               # Switch to the first window
               logger.info("\n cherche recrutement")
               browser.window(title: 'Trouver une offre').use
-              browser.execute_script("document.getElementsById(\"OffreEmploi__c_Region__c-36\").click()") # Open the rest in new tabs
+              browser.execute_script("document.getElementById(\"OffreEmploi__c_Region__c-36\").click()") # Open the rest in new tabs
               browser.execute_script("Array.from(document.getElementsByTagName(\"input\")).filter(x=>x.parentElement.textContent.includes(\"#{pays.upcase}\"))[0].checked=true") # Open the rest in new tabs
               browser.execute_script("Array.from(document.getElementsByTagName(\"button\")).filter(x=>x.title=(\"Rechercher une offre d'emploi\"))[0].click()") # Open the rest in new tabs
     

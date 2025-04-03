@@ -1,8 +1,13 @@
 
 function ecrireJobs(){
 var yeah=" <select id=\"monjob1\" name=\"job\">";
-var maliste=["informatique","technicien informatique","technicien informatique et réseaux","technicien support informatique","technicien réseau","ingénieur systèmes réseaux et cybersécurité","Technicien(ne) Fibre Optique et Cuivre","INGENIEUR INFORMATIQUE SUPERVISION & RESEAUX","Ingénieur Réseaux Terrain","Ingénieur Logiciel et Systèmes embarqués","INGENIEUR INFORMATIQUE INDUSTRIELLE","Architecte Système","commercial informatique BtoB","ingénieur commercial bureautique informatique","technicien automatisme","technicien methodes gmao","ingénieur électricité cfo cfa","ingénieur développeur python","technicien de maintenance","techniciens geii","Technicienne de maintenance en informatique","Gestionnaire informatique","responsable informatique","développeur informatique"," Administratrice réseau informatique ","agent d'accueil","technicien burautique","architecte système","administrateur système et réseaux","manager réseau","développeur c++","Programmeur Développement","Programmeur Développement","chargé d'études informatique","responsable des systèmes d'information","ingénieur commercial informatique","ingénieur commercial bureautique","correspondant informatique digital","Spécialiste système d’information","Technicien réseaux et télécommunications","technicien système"];
+var maliste=["informatique","ingénieur réseaux et télécoms","expert reseaux","technicien informatique","technicien informatique et réseaux","technicien support informatique","technicien réseau","ingénieur systèmes réseaux et cybersécurité","Technicien(ne) Fibre Optique et Cuivre","INGENIEUR INFORMATIQUE SUPERVISION & RESEAUX","Ingénieur Réseaux Terrain","Ingénieur Logiciel et Systèmes embarqués","INGENIEUR INFORMATIQUE INDUSTRIELLE","Architecte Système","commercial informatique BtoB","ingénieur commercial bureautique informatique","technicien automatisme","technicien methodes gmao","ingénieur électricité cfo cfa","ingénieur développeur python","technicien de maintenance","techniciens geii","Technicienne de maintenance en informatique","Gestionnaire informatique","responsable informatique","développeur informatique"," Administratrice réseau informatique ","agent d'accueil","technicien burautique","architecte système","administrateur système et réseaux","manager réseau","développeur c++","Programmeur Développement","Programmeur Développement","chargé d'études informatique","responsable des systèmes d'information","ingénieur commercial informatique","ingénieur commercial bureautique","correspondant informatique digital","Spécialiste système d’information","Technicien réseaux et télécommunications","technicien système","technicien courant faible","agent technique","technicien d’agence","Expert Technique Infrastructure","Expert sécurité réseaux","Technicien expert support réseaux et télécoms","Experte back-office","Experte en cybersécurité"," Experte qualité informatique","Experte en application informatique","experte middle-office","Experte méthodes et qualité informatique ","Électricienne réseaux "," Consultante réseaux informatiques ","Planificateur / Planificatrice réseaux de télécoms ","Pupitreur / Pupitreuse réseau informatique"," Responsable des développements informatiques ","ingenieur de donnees","développeur web","électricien réseau","chargée de projet web"];
 var malisteok=["agronome"];
+var malisteokok=["agent de voyage","Agente d'accueil touristique","Agent de voyage d'affaires expérimenté","Agent de voyage billettiste","Organisateur de Voyage","Forfaitiste en agence de voyage"];
+var accueil=["agent standardiste","chargé d'accueil","réceptionniste","agent d'information","hôtesse d'accueil standardiste"];
+var spectacle=["technicien spectacle site de divertissement"];
+var commerce=["vendeuse","assistance commerciale"];
+var com=[" Chargée de communication externe "];
 yeah+="  <optgroup label=\"informatique\">"
 for (var i=0;i<maliste.length;i++){
 yeah+="<option value=\""+maliste[i].toLowerCase().replace("&","").replace("(","").replace(")","")+"\">"+maliste[i].toLowerCase()+"</option>";
@@ -11,6 +16,31 @@ yeah+="  </optgroup>"
 yeah+="  <optgroup label=\"agronome\">"
 for (var i=0;i<malisteok.length;i++){
 yeah+="<option value=\""+malisteok[i].toLowerCase().replace("&","").replace("(","").replace(")","")+"\">"+malisteok[i].toLowerCase()+"</option>";
+}
+yeah+="  </optgroup>"
+yeah+="  <optgroup label=\"voyage\">"
+for (var i=0;i<malisteokok.length;i++){
+yeah+="<option value=\""+malisteokok[i].toLowerCase().replace("&","").replace("(","").replace(")","")+"\">"+malisteokok[i].toLowerCase()+"</option>";
+}
+yeah+="  </optgroup>"
+yeah+="  <optgroup label=\"accueil\">"
+for (var i=0;i<accueil.length;i++){
+yeah+="<option value=\""+accueil[i].toLowerCase().replace("&","").replace("(","").replace(")","")+"\">"+accueil[i].toLowerCase()+"</option>";
+}
+yeah+="  </optgroup>"
+yeah+="  <optgroup label=\"spectacle\">"
+for (var i=0;i<spectacle.length;i++){
+yeah+="<option value=\""+spectacle[i].toLowerCase().replace("&","").replace("(","").replace(")","")+"\">"+spectacle[i].toLowerCase()+"</option>";
+}
+yeah+="  </optgroup>"
+yeah+="  <optgroup label=\"vendeuse\">"
+for (var i=0;i<commerce.length;i++){
+yeah+="<option value=\""+commerce[i].toLowerCase().replace("&","").replace("(","").replace(")","")+"\">"+commerce[i].toLowerCase()+"</option>";
+}
+yeah+="  </optgroup>"
+yeah+="  <optgroup label=\"communication\">"
+for (var i=0;i<com.length;i++){
+yeah+="<option value=\""+com[i].toLowerCase().replace("&","").replace("(","").replace(")","")+"\">"+com[i].toLowerCase()+"</option>";
 }
 yeah+="  </optgroup>"
 yeah+="</select>";
