@@ -83,6 +83,24 @@ elsif y >= 10
 else
     actu=0
 end
+
+if y >= 100
+    indee=100
+elsif y >= 50
+    indee=50
+elsif y >= 35
+    indee=35
+elsif y >= 25
+    indee=25
+elsif y >= 15
+    indee=15
+elsif y >= 10
+    indee=10
+elsif y >= 5
+    indee=5
+else
+    indee=0
+end
 if y >= 100
     inclu=100
 elsif y >= 50
@@ -104,11 +122,12 @@ optionc=inclu
 if optionc == 2
    optionc=0
 end
+talent=optionc
 
 
 # Array of links
 
-links = ["https://jobs.eiffage.com/toutes-nos-offres?query=#{job}%20#{ville}&page=1","https://candidat.francetravail.fr/offres/recherche?lieux=#{code}&motsCles=#{job}&offresPartenaires=true&range=0-19&rayon=#{rayon}&tri=0","https://fr.talent.com/jobs?k=#{job}&l=#{ville}","https://www.flers-emplois.com/emploi/recherche.html?k=#{job}+#{ville}","https://www.cyphoma.com/search?utf8=%E2%9C%93&i18n_locale=fr&search%5Bpro%5D=&search%5Border%5D=&search%5Bpage%5D=&search%5Bq%5D=#{job}&search%5Bcategories%5D=&search%5Blocations%5D=4f7cea54c736276288002ce4&search%5Btype%5D=&search%5Burgent%5D=0&search%5Bnew_product%5D=0&search%5Bnew_product%5D=&search%5Bwith_medium%5D=0&commit=","https://www.stages-emplois.com/recherche-emploi.php?qemploi=#{job.downcase}&qville=#{ville.downcase}","https://emploi.lefigaro.fr/offres-emploi/v/#{ville.downcase.gsub(" ","-")}-#{code}","https://www.jemepropose.com/annonces/#{ville.downcase}-#{codedpt}/?keywords=#{job}","https://www.adecco.fr/resultats-offres-emploi/d-guyane-fran%C3%A7aise/","https://www.fomatguyane.fr/offres-d-emploi/offres-kourou","https://www.apec.fr/candidat/recherche-emploi.html/emploi?typesConvention=143684&typesConvention=143685&typesConvention=143686&typesConvention=143687&typesConvention=143706&motsCles=#{job}%20#{ville}&page=0","https://recrutement.education.gouv.fr/recrutement/offres?term=#{job}","https://choisirleservicepublic.gouv.fr/nos-offres/filtres/mot-cles/#{job}/","https://fr.linkedin.com/jobs/search?keywords=#{job}&location=#{ville}&geoId=&trk=public_jobs_jobs-search-bar_search-submit&distance=#{dist}&position=1&pageNum=0","https://emplois.inclusion.beta.gouv.fr/search/job-descriptions/results?city=#{ville.downcase}-#{codedpt}&city_name=#{ville}+%28#{codedpt}%29&distance=#{inclu}","https://www.adecco.fr/resultats-offres-emploi/d-#{pays.downcase}","https://www.groupeactual.eu/offre-emploi?limit=&order=#{job.split(" ").select {|x|x.length > 3}.map{|x| "&tags[]=#{x}"}.join("")}&keywords=&adresse=#{ville}%252C%2520#{pays}&is_guiana=0&distance=#{actu}&niveau-experience=0%3B10&relations%5Bbesoin%5D%5Bcontrat%5D%5Bdebut%5D=&js_range_demarrage_dates=&informations%5Bremunerations%5D=0%3B100000&page=1","https://www.fomatguyane.fr/offres-d-emploi/offres-cayenne","https://antilles-guyane.fiderim.fr/","https://www.job-interim-guyane.fr/offres-emploi?title=#{job}&secteur_activite=All","https://www.blada.com/recherche/?spe=emploi&mc=#{job}%20#{ville}","https://www.welcometothejungle.com/fr/jobs?refinementList%5Boffices.country_code%5D%5B%5D=GF&query=#{job}&page=1&aroundLatLng=#{lat}%2C#{lon}&aroundRadius=#{rayon}&aroundQuery=#{ville}%2C%20#{pays}","https://www.hellowork.com/fr-fr/emploi/recherche.html?k=#{job}&k_autocomplete=&l=#{ville}+#{code}&l_autocomplete=http%3A%2F%2Fwww.rj.com%2Fcommun%2Flocalite%2Fcommune%2F#{code}&st=relevance&d=all&ray=#{ray}","https://fr.indeed.com/jobs?q=#{job}&l=#{ville}+%28GF%29&from=searchOnHP%2Cwhatautocomplete&vjk=705d5a5133b8991c","https://fr.jooble.org/SearchResult?rgns=#{ville}%2C%20#{pays}&ukw=#{job}","https://www.jobijoba.com/fr/query/?what=#{job}&where=#{ville}&where_type=city&perimeter=#{jobi}","https://www.optioncarriere.gf/emploi?s=#{job}&l=#{ville}&radius=#{optionc}"]
+links = ["https://jobs.eiffage.com/toutes-nos-offres?query=#{job}%20#{ville}&page=1","https://candidat.francetravail.fr/offres/recherche?lieux=#{code}&motsCles=#{job}&offresPartenaires=true&range=0-19&rayon=#{rayon}&tri=0","https://fr.talent.com/jobs?k=#{job}&l=#{ville}&radius=#{talent}","https://www.flers-emplois.com/emploi/recherche.html?k=#{job}+#{ville}","https://www.cyphoma.com/search?utf8=%E2%9C%93&i18n_locale=fr&search%5Bpro%5D=&search%5Border%5D=&search%5Bpage%5D=&search%5Bq%5D=#{job}&search%5Bcategories%5D=&search%5Blocations%5D=4f7cea54c736276288002ce4&search%5Btype%5D=&search%5Burgent%5D=0&search%5Bnew_product%5D=0&search%5Bnew_product%5D=&search%5Bwith_medium%5D=0&commit=","https://www.stages-emplois.com/recherche-emploi.php?qemploi=#{job.downcase}&qville=#{ville.downcase}","https://emploi.lefigaro.fr/offres-emploi/v/#{ville.downcase.gsub(" ","-")}-#{code}","https://www.jemepropose.com/annonces/#{ville.downcase}-#{codedpt}/?keywords=#{job}","https://www.adecco.fr/resultats-offres-emploi/d-guyane-fran%C3%A7aise/","https://www.fomatguyane.fr/offres-d-emploi/offres-kourou","https://www.apec.fr/candidat/recherche-emploi.html/emploi?typesConvention=143684&typesConvention=143685&typesConvention=143686&typesConvention=143687&typesConvention=143706&motsCles=#{job}%20#{ville}&page=0","https://recrutement.education.gouv.fr/recrutement/offres?term=#{job}","https://choisirleservicepublic.gouv.fr/nos-offres/filtres/mot-cles/#{job}/","https://fr.linkedin.com/jobs/search?keywords=#{job}&location=#{ville}&geoId=&trk=public_jobs_jobs-search-bar_search-submit&distance=#{dist}&position=1&pageNum=0","https://emplois.inclusion.beta.gouv.fr/search/job-descriptions/results?city=#{ville.downcase}-#{codedpt}&city_name=#{ville}+%28#{codedpt}%29&distance=#{inclu}","https://www.adecco.fr/resultats-offres-emploi/d-#{pays.downcase}","https://www.groupeactual.eu/offre-emploi?limit=&order=#{job.split(" ").select {|x|x.length > 3}.map{|x| "&tags[]=#{x}"}.join("")}&keywords=&adresse=#{ville}%252C%2520#{pays}&is_guiana=0&distance=#{actu}&niveau-experience=0%3B10&relations%5Bbesoin%5D%5Bcontrat%5D%5Bdebut%5D=&js_range_demarrage_dates=&informations%5Bremunerations%5D=0%3B100000&page=1","https://www.fomatguyane.fr/offres-d-emploi/offres-cayenne","https://antilles-guyane.fiderim.fr/","https://www.job-interim-guyane.fr/offres-emploi?title=#{job}&secteur_activite=All","https://www.blada.com/recherche/?spe=emploi&mc=#{job}%20#{ville}","https://www.welcometothejungle.com/fr/jobs?refinementList%5Boffices.country_code%5D%5B%5D=GF&query=#{job}&page=1&aroundLatLng=#{lat}%2C#{lon}&aroundRadius=#{rayon}&aroundQuery=#{ville}%2C%20#{pays}","https://www.hellowork.com/fr-fr/emploi/recherche.html?k=#{job}&k_autocomplete=&l=#{ville}+#{code}&l_autocomplete=http%3A%2F%2Fwww.rj.com%2Fcommun%2Flocalite%2Fcommune%2F#{code}&st=relevance&d=all&ray=#{ray}","https://fr.indeed.com/jobs?q=#{job}&l=#{ville}+%28GF%29&radius=#{indee}&from=searchOnHP%2Cwhatautocomplete&vjk=705d5a5133b8991c","https://fr.jooble.org/SearchResult?rgns=#{ville}%2C%20#{pays}&ukw=#{job}","https://www.jobijoba.com/fr/query/?what=#{job}&where=#{ville}&where_type=city&perimeter=#{jobi}","https://www.optioncarriere.gf/emploi?s=#{job}&l=#{ville}&radius=#{optionc}"]
 links.each_slice(10).to_a.each do |myarray|
     # Open Chromium browser
     browser = Watir::Browser.new :firefox
