@@ -127,7 +127,7 @@ talent=optionc
 
 # Array of links
 
-links = ["https://destinationlesstravel.com/?s=#{job}+#{pays}","https://worldadventuredivers.com/?s=#{pays}","https://www.tripadvisor.com"]
+links = ["https://www.getyourguide.com/fr-fr/northeast-region-brazil-l1835/snorkeling-tc57/","https://www.adventure-life.com/","https://www.bing.com/search?q=#{ville}+#{job}+spots+#{dist}km","https://destinationlesstravel.com/?s=#{job}+#{pays}","https://worldadventuredivers.com/?s=#{pays}","https://www.tripadvisor.com","https://www.bing.com/search?q=site%3Ahttps%3A%2F%2Fwww.divediscovery.com+#{job}+#{ville.gsub(" ","+")}&qs=n&form=QBRE&sp=-1&lq=0&pq=site%3Ahttps%3A%2F%2Fwww.divediscovery.com+#{job}+#{ville}&sc=0-51&"]
 links.each_slice(10).to_a.each do |myarray|
     # Open Chromium browser
     browser = Watir::Browser.new :firefox
@@ -164,6 +164,16 @@ links.each_slice(10).to_a.each do |myarray|
               
               job.downcase.split(" ").each do |wow|
                   browser.execute_script("document.querySelector(\"[name=q]\").innerHTML=\"#{job} #{ville}\";document.querySelector(\"[role=search]\").submit();") # Open the rest in new tabs
+              end
+              sleep 0.5
+          elsif myarray.any?{|y|y.include?("adventure-life")} and yes.include?("adventure-life")
+              logger.info("\n cherche fomat")
+               
+              # Switch to the first window
+              browser.window(title: 'Adventure Life - Inspired. Authentic. You. | Leaders in private journeys, small group tours and expedition voyages worldwide.').use
+              
+              job.downcase.split(" ").each do |wow|
+                  browser.execute_script("document.querySelector(\".al-gn-search-opener\");document.querySelector(\"[name=q]\").innerHTML=\"#{job} #{ville}\";document.querySelector(\"[role=search]\").submit();") # Open the rest in new tabs
               end
               sleep 0.5
     
