@@ -127,7 +127,7 @@ talent=optionc
 
 # Array of links
 
-links = ["https://destinationlesstravel.com/?s=#{job}+#{pays}"]
+links = ["https://destinationlesstravel.com/?s=#{job}+#{pays}","https://worldadventuredivers.com/?s=#{pays}","https://www.tripadvisor.com"]
 links.each_slice(10).to_a.each do |myarray|
     # Open Chromium browser
     browser = Watir::Browser.new :firefox
@@ -156,81 +156,15 @@ links.each_slice(10).to_a.each do |myarray|
       begin
           yes=link
 
-          if myarray.any?{|y|y.include?("kourou") and y.include?("fomatguyane")} and yes.include?("fomatguyane") and yes.include?("kourou")
+          if myarray.any?{|y|y.include?("tripadvisor")} and yes.include?("tripadvisor")
               logger.info("\n cherche fomat")
                
               # Switch to the first window
-              browser.window(title: 'OFFRES KOUROU - FOMAT GUYANE').use
+              browser.window(title: 'Tripadvisor: Over a billion reviews & contributions for Hotels, Attractions, Restaurants, and more').use
               
               job.downcase.split(" ").each do |wow|
-                  browser.execute_script("document.body.innerHTML=document.body.innerHTML.toLowerCase().replace((new RegExp('(#{wow})','g')), '<mark>#{wow}</mark>');") # Open the rest in new tabs
+                  browser.execute_script("document.querySelector(\"[name=q]\").innerHTML=\"#{job} #{ville}\";document.querySelector(\"[role=search]\").submit();") # Open the rest in new tabs
               end
-              sleep 0.5
-          elsif myarray.any?{|y|y.include?("fiderim")} and yes.include?("fiderim")
-              logger.info("\n cherche fiderim")
-               
-              # Switch to the first window
-              browser.window(title: "Agence d'intérim Antilles-Guyane - Emploi et recrutement | Fiderim").use
-    
-              browser.execute_script("offer_search_search.value='#{job.gsub("'","\'")}'") # Open the rest in new tabs
-              browser.execute_script("offer_search.parentElement.submit();") # Open the rest in new tabs
-              sleep 0.5
-          elsif myarray.any?{|y|y.include?("fomatguyane") and y.include?("cayenn")} and yes.include?("fomatguyane") and yes.include?("cayenne")
-               
-              # Switch to the first window
-              browser.window(title: 'OFFRES CAYENNE - FOMAT GUYANE').use
-    
-              browser.execute_script("document.body.innerHTML=document.body.innerHTML.toLowerCase().replace((new RegExp('#{job.downcase}','g')), '<mark>#{job}</mark>');") # Open the rest in new tabs
-              sleep 0.5
-          elsif myarray.any?{|y|y.include?("blada.com")} and yes.include?("blada.com")
-              logger.info("\n cherche blada")
-               
-              # Switch to the first window
-              browser.window(title: 'Blada.com - Moteur de recherche').use
-    
-              browser.execute_script("document.body.innerHTML=document.body.innerHTML.toLowerCase().replace((new RegExp('#{job.downcase}','g')), '<mark>#{job}</mark>');") # Open the rest in new tabs
-              sleep 0.5
-          #elsif yes.include?("lefigaro")
-          #    
-          #     
-          #    # Switch to the first window
-          #    browser.window(title: "Offres Emploi #{ville} (#{code}) - #{I18n.localize(Date.today, format: :figaro).capitalize}").use
-          #    browser.execute_script("jQuery('[aria-label=Poste recherché]')[0].value=\"#{job}\"") # Open the rest in new tabs
-          #    browser.execute_script("jQuery('[aria-label=Rechercher]')[0].click()") # Open the rest in new tabs
-          #    sleep 0.5
-    
-          elsif myarray.any?{|y|y.include?("choisir")} and yes.include?("choisir")
-              logger.info("\n cherche choisir")
-               
-              # Switch to the first window
-              browser.window(title: "Offres d'emploi domaine | Choisir le service public").use
-    
-              browser.execute_script("document.getElementsByTagName(\"button\")[12].click()") # Open the rest in new tabs
-              browser.execute_script("document.getElementsByTagName(\"input\")[30].value=\"#{pays}\"") # Open the rest in new tabs
-              browser.execute_script("Array.from(document.getElementsByTagName(\"input\")).filter(x=>x.parentElement.textContent.includes(\"#{pays}\"))[21].checked=true") # Open the rest in new tabs
-              browser.execute_script("document.getElementsByClassName(\"actions1\")[0].children[2].click()")
-              sleep 0.5
-    
-          elsif myarray.any?{|y|y.include?("recrutement")} and yes.include?("recrutement")
-               
-              # Switch to the first window
-              logger.info("\n cherche recrutement")
-              browser.window(title: 'Trouver une offre').use
-              browser.execute_script("document.getElementById(\"OffreEmploi__c_Region__c-36\").click()") # Open the rest in new tabs
-              browser.execute_script("Array.from(document.getElementsByTagName(\"input\")).filter(x=>x.parentElement.textContent.includes(\"#{pays.upcase}\"))[0].checked=true") # Open the rest in new tabs
-              browser.execute_script("Array.from(document.getElementsByTagName(\"button\")).filter(x=>x.title=(\"Rechercher une offre d'emploi\"))[0].click()") # Open the rest in new tabs
-    
-              sleep 0.5
-    
-          elsif myarray.any?{|y|y.include?("cyphoma")} and yes.include?("cyphoma")
-               
-              logger.info("\n cherche cyphoma")
-              # Switch to the first window
-              browser.window(title: "Annonces \"#{myjob}\" #{pays} (#{codedpt}) • Cyphoma").use
-    
-              browser.execute_script("jQuery('[data-label=jobs]')[0].selected=true") # Open the rest in new tabs
-              browser.execute_script("search_q.value=\"#{job}\"") # Open the rest in new tabs
-              browser.execute_script("new_search.submit()") # Open the rest in new tabs
               sleep 0.5
     
           end
