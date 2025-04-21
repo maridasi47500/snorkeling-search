@@ -8,11 +8,10 @@
 gem install watir addressable i18n logger
 pip3 install geopy
 pip3 install geopandas
-    mkdir -p ~/path/to/venv
-    python3 -m venv ~/path/to/venv
-    source ~/path/to/venv/bin/activate
-    sh mysite.sh
-    #python3 -m pip install xyz
+mkdir -p ~/going/to/snorkeling/spot/venv
+python3 -m venv ~/going/to/snorkeling/spot/venv
+source ~/going/to/snorkeling/spot/bin/activate
+sh mysite.sh
 
 
 ````
